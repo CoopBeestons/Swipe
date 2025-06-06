@@ -8,9 +8,7 @@ let touchEndX = 0;
 
 // Ensure first image is visible on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Make sure the first image is visible
     imageWrappers[0].classList.add('active');
-    imageWrappers[0].style.opacity = '1';
 });
 
 // Touch events for mobile devices
@@ -30,13 +28,13 @@ function handleSwipe() {
         // Swipe left - go to next slide
         if (currentSlide < totalSlides - 1) {
             currentSlide++;
-            updateImageVisibility();
+            slideToNext();
         }
     } else if (touchEndX > touchStartX && Math.abs(touchEndX - touchStartX) > swipeThreshold) {
         // Swipe right - go to previous slide
         if (currentSlide > 0) {
             currentSlide--;
-            updateImageVisibility();
+            slideToPrevious();
         }
     }
 
@@ -45,14 +43,36 @@ function handleSwipe() {
     touchEndX = 0;
 }
 
-function updateImageVisibility() {
-    // Remove active class from all images
-    imageWrappers.forEach(wrapper => {
-        wrapper.classList.remove('active');
-        wrapper.style.opacity = '0';
-    });
+function slideToNext() {
+    // Get current and next image
+    const current = imageWrappers[currentSlide - 1];
+    const next = imageWrappers[currentSlide];
     
-    // Add active class to current slide
-    imageWrappers[currentSlide].classList.add('active');
-    imageWrappers[currentSlide].style.opacity = '1';
+    // Set up the transition
+    current.classList.add('prev');
+    next.classList.add('next');
+    
+    // Wait for transition to complete
+    setTimeout(() => {
+        current.classList.remove('active', 'prev');
+        next.classList.remove('next');
+        next.classList.add('active');
+    }, 500);
+}
+
+function slideToPrevious() {
+    // Get current and previous image
+    const current = imageWrappers[currentSlide + 1];
+    const previous = imageWrappers[currentSlide];
+    
+    // Set up the transition
+    current.classList.add('next');
+    previous.classList.add('prev');
+    
+    // Wait for transition to complete
+    setTimeout(() => {
+        current.classList.remove('active', 'next');
+        previous.classList.remove('prev');
+        previous.classList.add('active');
+    }, 500);
 }
