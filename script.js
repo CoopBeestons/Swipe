@@ -1,13 +1,14 @@
 let currentSlide = 0;
 const slides = document.querySelector('.image-slider');
 const totalSlides = document.querySelectorAll('.image-wrapper').length;
+const imageWrappers = document.querySelectorAll('.image-wrapper');
 
 let touchStartX = 0;
 let touchEndX = 0;
 
 // Ensure first image is visible on page load
 document.addEventListener('DOMContentLoaded', () => {
-    slides.style.transform = `translateX(-${currentSlide * 100}vw)`;
+    updateImageVisibility();
 });
 
 // Touch events for mobile devices
@@ -27,17 +28,27 @@ function handleSwipe() {
         // Swipe left - go to next slide
         if (currentSlide < totalSlides - 1) {
             currentSlide++;
-            slides.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            updateImageVisibility();
         }
     } else if (touchEndX > touchStartX && Math.abs(touchEndX - touchStartX) > swipeThreshold) {
         // Swipe right - go to previous slide
         if (currentSlide > 0) {
             currentSlide--;
-            slides.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            updateImageVisibility();
         }
     }
 
     // Reset touch positions
     touchStartX = 0;
     touchEndX = 0;
+}
+
+function updateImageVisibility() {
+    // Remove active class from all images
+    imageWrappers.forEach(wrapper => {
+        wrapper.classList.remove('active');
+    });
+    
+    // Add active class to current slide
+    imageWrappers[currentSlide].classList.add('active');
 }
