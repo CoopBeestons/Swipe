@@ -31,4 +31,8 @@ function handleSwipe() {
             slides.style.transform = `translateX(-${currentSlide * 100}vw)`;
         }
     }
+
+    // Reset touch positions
+    touchStartX = 0;
+    touchEndX = 0;
 }

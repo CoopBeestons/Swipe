@@ -13,6 +13,7 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    position: relative;
 }
 
 .image-slider {
@@ -20,6 +21,9 @@ body {
     width: 400vw;
     height: 100vh;
     transition: transform 0.3s ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .image-wrapper {
@@ -28,6 +32,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .image-wrapper img {
