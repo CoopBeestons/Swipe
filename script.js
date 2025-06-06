@@ -5,6 +5,11 @@ const totalSlides = document.querySelectorAll('.image-wrapper').length;
 let touchStartX = 0;
 let touchEndX = 0;
 
+// Ensure first image is visible on page load
+document.addEventListener('DOMContentLoaded', () => {
+    slides.style.transform = `translateX(-${currentSlide * 100}vw)`;
+});
+
 // Touch events for mobile devices
 slides.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
