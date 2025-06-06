@@ -44,11 +44,11 @@ function handleSwipe() {
 }
 
 function updateImageVisibility() {
-    // Remove active class from all images
+    // Hide all images
     imageWrappers.forEach(wrapper => {
-        wrapper.classList.remove('active');
+        wrapper.style.display = 'none';
     });
     
-    // Add active class to current slide
-    imageWrappers[currentSlide].classList.add('active');
+    // Show current image
+    imageWrappers[currentSlide].style.display = 'block';
 }
