@@ -29,10 +29,13 @@ body {
     top: 0;
     left: 0;
     display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .image-wrapper.active {
     display: block;
+    opacity: 1;
 }
 
 .image-wrapper img {

@@ -8,7 +8,9 @@ let touchEndX = 0;
 
 // Ensure first image is visible on page load
 document.addEventListener('DOMContentLoaded', () => {
-    updateImageVisibility();
+    // Make sure the first image is visible
+    imageWrappers[0].classList.add('active');
+    imageWrappers[0].style.opacity = '1';
 });
 
 // Touch events for mobile devices
@@ -44,11 +46,13 @@ function handleSwipe() {
 }
 
 function updateImageVisibility() {
-    // Hide all images
+    // Remove active class from all images
     imageWrappers.forEach(wrapper => {
-        wrapper.style.display = 'none';
+        wrapper.classList.remove('active');
+        wrapper.style.opacity = '0';
     });
     
-    // Show current image
-    imageWrappers[currentSlide].style.display = 'block';
+    // Add active class to current slide
+    imageWrappers[currentSlide].classList.add('active');
+    imageWrappers[currentSlide].style.opacity = '1';
 }
